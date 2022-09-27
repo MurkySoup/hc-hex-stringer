@@ -1,4 +1,5 @@
 # hc-hex-stringer
+
 Hashcat Hex Password Format Converter Utility
 
 # Description and Example Usage:
@@ -22,7 +23,15 @@ To 'decode' a given hex string to (hopefully) printable text:
 &#39:159753
 ```
 
-Standard error codes apply. '0' for success and '1' for failure.
+# Signalling
+
+Standard *nix-style messaging and exit codes apply:
+* Successful output will be written to 'stdout'.
+* Exit code '0' for success.
+* Error messages will be written to 'stderr'.
+* Exit code '1' for failure.
+
+Efforts have been made to try to make this utility 'script-friendly' and generally easy to include into automation and scripted workflows.
 
 # Prerequisites
 
