@@ -3,7 +3,7 @@
 
 
 """
-Hashcat Hex Password Format Converter, Version 0.4-Beta (Do Not Distribute)
+Hashcat Hex Password Format Converter, Version 0.4.1-Beta (Do Not Distribute)
 By Rick Pelletier (galiagante@gmail.com), 25 September 2022
 Last update: 27 September 2022
 
@@ -45,11 +45,10 @@ def str_to_hc_hex(string:str):
 if __name__ == '__main__':
   exit_code = 0
   parser = argparse.ArgumentParser()
-  option_group = parser.add_argument('-s', '--string', help='String to en-/de-code', type=str, required=True)
   command_group = parser.add_mutually_exclusive_group(required=True)
   command_group.add_argument('-e', '--encode', help='Operation to encode a string', action='store_true')
   command_group.add_argument('-d', '--decode', help='Operation to decode a string', action='store_true')
-
+  option_group = parser.add_argument('-s', '--string', help='String to en-/de-code', type=str, required=True)
   args = parser.parse_args()
 
   if args.encode:
