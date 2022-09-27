@@ -59,7 +59,7 @@ if __name__ == '__main__':
     decoded = hc_hex_to_str(args.string)
 
     if decoded is not False:
-      print(f'{hc_hex_to_str(args.string)}')
+      print(f'{decoded}')
     else:
       print('Error decoding string')
       exit_code = 1
