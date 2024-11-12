@@ -26,16 +26,14 @@ To 'decode' a given hex string to (hopefully) printable text:
 # Signalling
 
 Standard *nix-style messaging and exit codes apply:
-* Successful output will be written to 'stdout'.
 * Exit code '0' for success.
-* Error messages will be written to 'stderr'.
 * Exit code '1' for failure.
 
 Efforts have been made to try to make this utility 'script-friendly' and generally easy to include into automation and scripted workflows.
 
 # Prerequisites
 
-Requires Python 3.x (preferably 3.6+) and uses the following (entirely standard) libraries:
+Requires Python 3.x (preferably 3.7+) and uses the following (entirely standard) libraries:
 * sys
 * argparse
 
