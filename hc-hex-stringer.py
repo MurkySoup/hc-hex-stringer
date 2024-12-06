@@ -3,9 +3,9 @@
 
 
 """
-Hashcat Hex Password Format Converter, Version 0.6.1-Beta (Do Not Distribute)
+Hashcat Hex Password Format Converter, Version 0.7.1-Beta (Do Not Distribute)
 By Rick Pelletier (galiagante@gmail.com), 25 September 2022
-Last update: 12 November 2024
+Last update: 06 December 2024
 
 Example usage:
 
@@ -19,9 +19,10 @@ $HEX[6d6172717565653a]
 
 import sys
 import argparse
+import chardet
 
 
-def is_hexstring(string: str):
+def is_hexstring(string:str):
     if len(string) % 2 != 0:
         return False
 
@@ -34,17 +35,21 @@ def is_hexstring(string: str):
         return False
 
 
-def hc_hex_to_str(string: str):
+def hc_hex_to_str(string:str):
     if string.startswith('$HEX[') and string.endswith(']') and is_hexstring(string[5:-1]):
         try:
-            return bytes.fromhex(string[5:-1]).decode('utf-8')
-        except:
-            return bytes.fromhex(string[5:-1]).decode('cp1252')
+            encoding_detection = chardet.detect(bytes.fromhex(string[5:-1]))
+
+            return bytes.fromhex(string[5:-1]).decode(encoding_detection['encoding'])
+        except Exception as e:
+            print(e)
+
+            return False
     else:
         return False
 
 
-def str_to_hc_hex(string: str):
+def str_to_hc_hex(string:str):
     return (f'$HEX[{string.encode("utf-8").hex()}]')
 
 
