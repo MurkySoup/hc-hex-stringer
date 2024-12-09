@@ -36,6 +36,7 @@ Efforts have been made to try to make this utility 'script-friendly' and general
 Requires Python 3.x (preferably 3.7+) and uses the following (entirely standard) libraries:
 * sys
 * argparse
+* chardet
 
 # License
 

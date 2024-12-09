@@ -14,6 +14,10 @@ $HEX[6d6172717565653a]
 
 # ./hc-hex-stringer.py --string '$HEX[262333393a313539373533]' --decode
 &#39:159753
+
+TODO:
+- More tidying up of output to add to "script friendliness"
+- Better handling of non-decodable string.
 """
 
 
@@ -76,5 +80,6 @@ if __name__ == '__main__':
     sys.exit(exit_code)
 else:
     sys.exit(1)
+
 
 # end of script
