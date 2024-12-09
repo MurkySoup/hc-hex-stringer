@@ -3,9 +3,9 @@
 
 
 """
-Hashcat Hex Password Format Converter, Version 0.7.1-Beta (Do Not Distribute)
+Hashcat Hex Password Format Converter, Version 0.7.3-Beta (Do Not Distribute)
 By Rick Pelletier (galiagante@gmail.com), 25 September 2022
-Last update: 06 December 2024
+Last update: 09 December 2024
 
 Example usage:
 
@@ -15,9 +15,10 @@ $HEX[6d6172717565653a]
 # ./hc-hex-stringer.py --string '$HEX[262333393a313539373533]' --decode
 &#39:159753
 
-TODO:
-- More tidying up of output to add to "script friendliness"
-- Better handling of non-decodable string.
+In the event of an encoding or decoding error (for example, chardet could not
+identify the correct character set to perform a conversion), nothing will be
+displayed, but an exit code of '1' will be returned to the O/S. Successful
+en/decoding will return the converted string and an exit code of '0'.
 """
 
 
@@ -39,22 +40,24 @@ def is_hexstring(string:str):
         return False
 
 
-def hc_hex_to_str(string:str):
-    if string.startswith('$HEX[') and string.endswith(']') and is_hexstring(string[5:-1]):
+def hc_hex_to_str(hex_string:str):
+    if hex_string.startswith('$HEX[') and hex_string.endswith(']') and is_hexstring(hex_string[5:-1]):
         try:
-            encoding_detection = chardet.detect(bytes.fromhex(string[5:-1]))
+            encoding_detection = chardet.detect(bytes.fromhex(hex_string[5:-1]))
 
-            return bytes.fromhex(string[5:-1]).decode(encoding_detection['encoding'])
+            return bytes.fromhex(hex_string[5:-1]).decode(encoding_detection['encoding'])
         except Exception as e:
-            print(e)
-
             return False
     else:
         return False
 
 
 def str_to_hc_hex(string:str):
-    return (f'$HEX[{string.encode("utf-8").hex()}]')
+    try:
+        return (f'$HEX[{string.encode("utf-8").hex()}]')
+
+    except Exception as e:
+        return False
 
 
 if __name__ == '__main__':
@@ -67,15 +70,16 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if args.encode:
-        encoded = str_to_hc_hex(args.string)
-        print(encoded)
+        if (encoded := str_to_hc_hex(args.string)) is False:
+            exit_code = 1
+        else:
+            print(encoded)
 
     if args.decode:
-        if (decoded := hc_hex_to_str(args.string)) is not False:
-            print(decoded)
-        else:
-            print('Error decoding string')
+        if (decoded := hc_hex_to_str(args.string)) is False:
             exit_code = 1
+        else:
+            print(decoded)
 
     sys.exit(exit_code)
 else:
