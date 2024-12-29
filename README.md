@@ -38,7 +38,7 @@ To 'decode' a given hex string to (hopefully) printable text:
 
 # Caveats:
 
-Some data encoded in this manner cannot be "decoded" in the conventional sense, particularly when 'chardet' cannet determine a viable character set use use. Binary data is a good example of non-decodeable data.
+Some data encoded in this manner cannot be "decoded" in the conventional sense, particularly when 'chardet' cannot determine a viable character set use use. Binary data is a good example of "non-decodeable" data.
 
 # Signalling
 
