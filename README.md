@@ -4,22 +4,24 @@ Hashcat Hex Password Format Converter Utility
 
 # Prerequisites
 
-Requires Python 3.x (preferably 3.7+) and uses the following (entirely standard) libraries:
+Requires Python 3.x (preferably 3.8+) and uses the following (entirely standard) libraries:
 * sys
 * argparse
 * chardet
+* pathlib
 
 # Example Usage:
 
 Command-line help:
 ```
-usage: hc-hex-stringer.py [-h] (-e | -d) -s STRING
+usage: hc-hex-stringer.py [-h] (-s STRING | -f FILE) (-e | -d)
 
 options:
-  -h, --help                  Show this help message and exit
-  -e, --encode                Operation to encode a string
-  -d, --decode                Operation to decode a string
-  -s STRING, --string STRING  String to en-/de-code
+  -h, --help                    show this help message and exit
+  -s STRING, --string STRING    string to en-/de-code
+  -f FILE, --file FILE          file to en-/de-code
+  -e, --encode                  encode to hc hex format
+  -d, --decode                  decode from hc hex format
 ```
 
 You must specify a mode of operation (encode or decode) and a string against which to perform said operation.
@@ -35,6 +37,13 @@ To 'decode' a given hex string to (hopefully) printable text:
 # ./hc-hex-stringer.py --string '$HEX[262333393a313539373533]' --decode
 &#39:159753
 ```
+
+A process-by-file option is available, assumes one string per line, and can be easily redirected to another file:
+```
+# ./hc-hex-stringer.py [--encode | --decode] --file input_file.txt > output_file.txt
+```
+
+During this operations, any line that cannot be correctly en/decoded is skipped and no error message will be displayed.
 
 # Caveats:
 
