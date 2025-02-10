@@ -22,9 +22,10 @@ options:
   -f FILE, --file FILE          file to en-/de-code
   -e, --encode                  encode to hc hex format
   -d, --decode                  decode from hc hex format
+  -i, --ignore                  ignore decoding errors
 ```
 
-You must specify a mode of operation (encode or decode) and a string against which to perform said operation.
+You must specify a mode of operation (encode or decode) and a string or file against which to perform said operation.
 
 To 'encode' a given string into Hashcat's 'hex' format:
 ```
@@ -43,7 +44,7 @@ A process-by-file option is available, assumes one string per line, and can be e
 # ./hc-hex-stringer.py [--encode | --decode] --file input_file.txt > output_file.txt
 ```
 
-During this operations, any line that cannot be correctly en/decoded is skipped and no error message will be displayed.
+During this operations, any line that cannot be correctly en/decoded is skipped and no error message will be displayed. An override option is available to bypass this behavior.
 
 # Caveats:
 
