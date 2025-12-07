@@ -49,7 +49,7 @@ During this operations, any line that cannot be correctly en/decoded is skipped 
 
 # Caveats:
 
-Some data encoded in this manner cannot be "decoded" in the conventional sense, particularly when 'chardet' cannot determine a viable character set use use. Binary data is a good example of non-decodeable data.
+Some data encoded in this manner cannot be "decoded" in the conventional sense, particularly when 'chardet' cannot determine a viable character set use use. Binary data is a good example of "non-decodeable" data.
 
 # Signalling
 
