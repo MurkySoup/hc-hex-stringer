@@ -11,9 +11,7 @@ Requires Python 3.x (preferably 3.11+) and uses the following libraries:
 * pathlib
 * chardet
 
-# Example Usage:
-
-Command-line help:
+# Command-line help:
 ```
 usage: hc-hex-stringer.py [-h] (-s STRING | -f FILE) (-e | -d) (--fast | --safe) [-i] [--verbose]
 
@@ -32,7 +30,12 @@ options:
   --verbose             Show warnings on stderr (otherwise silent unless verbose)
 ```
 
-You must specify a mode of operation (encode or decode) and a string or file against which to perform said operation.
+Note: One option from each mutually exclusive set must be supplied.
+  --encode and --decode are mutually exclusive options
+  --file and --string are mutually exclusive options
+  --fast and --safe are mutually exclusive options
+
+# Example Usage:
 
 To 'encode' a given string into Hashcat's 'hex' format:
 ```
