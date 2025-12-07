@@ -15,34 +15,40 @@ Requires Python 3.x (preferably 3.11+) and uses the following libraries:
 
 Command-line help:
 ```
-usage: hc-hex-stringer.py [-h] (-s STRING | -f FILE) (-e | -d)
+usage: hc-hex-stringer.py [-h] (-s STRING | -f FILE) (-e | -d) (--fast | --safe) [-i] [--verbose]
+
+Hashcat $HEX[...] encoder/decoder (dual-path: safe / fast)
 
 options:
-  -h, --help                    show this help message and exit
-  -s STRING, --string STRING    string to en-/de-code
-  -f FILE, --file FILE          file to en-/de-code
-  -e, --encode                  encode to hc hex format
-  -d, --decode                  decode from hc hex format
-  -i, --ignore                  ignore decoding errors
+  -h, --help            show this help message and exit
+  -s STRING, --string STRING
+                        String to encode or decode
+  -f FILE, --file FILE  File containing one string per line to encode/decode
+  -e, --encode          Encode to $HEX[...] format
+  -d, --decode          Decode from $HEX[...] format
+  --fast                Fast decode path: assume UTF-8 only (no chardet)
+  --safe                Safe decode path: use chardet (recommended)
+  -i, --ignore          Ignore decoding errors (per-line)
+  --verbose             Show warnings on stderr (otherwise silent unless verbose)
 ```
 
 You must specify a mode of operation (encode or decode) and a string or file against which to perform said operation.
 
 To 'encode' a given string into Hashcat's 'hex' format:
 ```
-# ./hc-hex-stringer.py --string 'marquee:' --encode
+# ./hc-hex-stringer.py --string 'marquee:' --encode --fast
 $HEX[6d6172717565653a]
 ```
 
 To 'decode' a given hex string to (hopefully) printable text:
 ```
-# ./hc-hex-stringer.py --string '$HEX[262333393a313539373533]' --decode
+# ./hc-hex-stringer.py --string '$HEX[262333393a313539373533]' --decode --safe
 &#39:159753
 ```
 
 A process-by-file option is available, assumes one string per line, and can be easily redirected to another file:
 ```
-# ./hc-hex-stringer.py [--encode | --decode] --file input_file.txt > output_file.txt
+# ./hc-hex-stringer.py [ --encode | --decode ] [ --fast | --safe ] --file input_file.txt > output_file.txt
 ```
 
 During this operations, any line that cannot be correctly en/decoded is skipped and no error message will be displayed. An override option is available to bypass this behavior.
