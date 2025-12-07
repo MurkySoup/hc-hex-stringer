@@ -4,11 +4,12 @@ Hashcat Hex Password Format Converter Utility
 
 # Prerequisites
 
-Requires Python 3.x (preferably 3.8+) and uses the following (entirely standard) libraries:
-* sys
+Requires Python 3.x (preferably 3.11+) and uses the following libraries:
+* annotations (future)
 * argparse
-* chardet
+* sys
 * pathlib
+* chardet
 
 # Example Usage:
 
