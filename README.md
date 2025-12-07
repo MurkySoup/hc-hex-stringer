@@ -4,11 +4,12 @@ Hashcat Hex Password Format Converter Utility
 
 # Prerequisites
 
-Requires Python 3.x (preferably 3.8+) and uses the following (entirely standard) libraries:
-* sys
+Requires Python 3.x (preferably 3.11+) and uses the following libraries:
+* annotations (future)
 * argparse
-* chardet
+* sys
 * pathlib
+* chardet
 
 # Example Usage:
 
@@ -48,7 +49,7 @@ During this operations, any line that cannot be correctly en/decoded is skipped 
 
 # Caveats:
 
-Some data encoded in this manner cannot be "decoded" in the conventional sense, particularly when 'chardet' cannet determine a viable character set use use. Binary data is a good example of non-decodeable data.
+Some data encoded in this manner cannot be "decoded" in the conventional sense, particularly when 'chardet' cannot determine a viable character set use use. Binary data is a good example of non-decodeable data.
 
 # Signalling
 
